@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -12,12 +12,17 @@ const userSchema = mongoose.Schema({
         unique: true
     },
     password: {
-        type: password,
+        type: String,
         required: true,
-        unique: true
+    },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+        default: false
     }
-},
-{timestamps: true})
+}, 
+{timestamps: true}
+)
 
 const User = mongoose.model('User', userSchema)
 
