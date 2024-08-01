@@ -43,5 +43,7 @@ export const signinController = async (req, res, next) => {
       })
       .status(200)
       .json(restUserDetails);
-  } catch (err) {}
+  } catch (err) {
+    next(err);
+  }
 };
