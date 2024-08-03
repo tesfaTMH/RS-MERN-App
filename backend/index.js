@@ -1,5 +1,6 @@
 import express, { urlencoded } from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/errorHandler.js";
 
 import connectDB from "./config/connectDB.js";
@@ -11,6 +12,7 @@ dotenv.config();
 connectDB();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 const PORT = 3000;
 
