@@ -6,6 +6,7 @@ import errorHandler from "./middlewares/errorHandler.js";
 import connectDB from "./config/connectDB.js";
 import testRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
+import listingRoute from "./routes/listingRoute.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ const PORT = 3000;
 
 app.use("/api/user", testRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/listing", listingRoute);
 
 // error handler
 app.use(errorHandler);
