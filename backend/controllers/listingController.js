@@ -40,9 +40,13 @@ export const updateListingController = async (req, res, next) => {
   }
 
   try {
-    const updatedListing = Listing.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const updatedListing = await Listing.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
     res.status(200).json(updatedListing);
   } catch (err) {
     next(err);
