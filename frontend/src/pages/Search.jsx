@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingCard from "../components/ListingCard";
 
 function Search() {
   const [sidebardata, setSidebardata] = useState({
@@ -14,8 +15,6 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const navigate = useNavigate();
-
-  console.log(listings);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -81,7 +80,7 @@ function Search() {
     }
     if (e.target.id === "sort_order") {
       const sort = e.target.value.split("_")[0] || "created_at";
-      const order = e.target.value.split("_")[0] || "desc";
+      const order = e.target.value.split("_")[1] || "desc";
       setSidebardata({ ...sidebardata, sort, order });
     }
   };
@@ -207,6 +206,22 @@ function Search() {
       </div>
       <h1 className="text-3xl font-semibold border-b-2 p-3 text-slate-700 mt-5">
         Listing results
+        <div className="flex flex-wrap gap-4 p-7">
+          {!loading && listings.length === 0 && (
+            <p className="text-xl text-slate-700">No listing found!</p>
+          )}
+          {loading && (
+            <p className="text-xl text-slate-700 text-center w-full">
+              Loading...
+            </p>
+          )}
+
+          {!loading &&
+            listings &&
+            listings.map((listing) => {
+              return <ListingCard key={listing._id} listing={listing} />;
+            })}
+        </div>
       </h1>
     </div>
   );
