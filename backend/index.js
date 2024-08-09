@@ -8,6 +8,10 @@ import testRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
 import listingRoute from "./routes/listingRoute.js";
 
+import path from "path";
+
+const __dirname = path.resolve();
+
 dotenv.config();
 
 connectDB();
@@ -20,6 +24,12 @@ const PORT = 3000;
 app.use("/api/user", testRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/listing", listingRoute);
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 
 // error handler
 app.use(errorHandler);
